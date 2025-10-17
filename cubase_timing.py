@@ -3,7 +3,7 @@ TICKS_PER_4TH_NOTE = 4 * TICKS_PER_16TH_NOTE
 TICKS_PER_BAR = 4 * TICKS_PER_4TH_NOTE
 
 # each aublist is: [#intervals, #notes, #4thnotes]
-INTERVALS= [[3, 0, 2]]
+SPLITS = [[3, 0, 2]]
 
 class CubaseTime:
     
@@ -24,27 +24,21 @@ class CubaseTime:
 	@property
 	def ticks(self):				# getter
 		return self._ticks
-
-
-class Interval:
-
-	def __init__(self, intervals, notes, notes_4th):
-		self._intervals = intervals
-		self._notes = notes
-		self._notes_4th = notes_4th
-
-	@property
-	def intervals(self):			# getter
-		return self.intervals
-
-	@property
-	def notes(self):				# getter
-		return self._notes
-
-	@property
-	def notes_4th(self):			# getter
-		return self._notes_4th
+	
+	def __str__(self):
+		return f'{self.notes_4th} 4th notes, {self.notes_16th} 16th notes, {self.ticks} ticks'
 
 def main():
-	for interval in INTERVALS:
-		pass
+	print()
+	for split in SPLITS:
+		splits = split[0]
+		notes_4th = split[1]
+		notes_16th = split[2]
+
+		print(f'{splits} splits, {notes_4th} 4th notes, {notes_16th} 16th notes')
+
+		ct = CubaseTime(notes_4th * TICKS_PER_4TH_NOTE + notes_16th * TICKS_PER_16TH_NOTE)
+		print(ct)
+
+if __name__ == '__main__':
+	main()
