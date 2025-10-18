@@ -8,16 +8,12 @@ TICKS_BAR = 4 * TICKS_4TH_NOTE
 SPLIT_SPECS = ((3, 1, 0), (3, 2, 0), (3, 4, 0),
 			   (4, 1, 0), (4, 3, 0), (4, 5, 0))
 
-class CubaseTime:
-    
-	def __init__(self, ticks):
-		self._notes_4th = ticks // TICKS_4TH_NOTE
-		ticks = ticks % TICKS_4TH_NOTE
-		self._notes_16th = ticks // TICKS_16TH_NOTE
-		self._ticks = ticks % TICKS_16TH_NOTE
-
-	def __str__(self):
-		return f'{self._notes_4th} {self._notes_16th} {self._ticks}'
+def cubase_time(ticks):
+	notes_4th = ticks // TICKS_4TH_NOTE
+	ticks = ticks % TICKS_4TH_NOTE
+	notes_16th = ticks // TICKS_16TH_NOTE
+	ticks = ticks % TICKS_16TH_NOTE
+	return (notes_4th, notes_16th, ticks)
 
 def print_split(splits, notes_4th, notes_16th):
 
@@ -25,8 +21,8 @@ def print_split(splits, notes_4th, notes_16th):
 
 	split_ticks = (notes_4th * TICKS_4TH_NOTE + notes_16th * TICKS_16TH_NOTE) // splits
 	for split in range(1, splits):
-		ct = CubaseTime(split_ticks * split)
-		print(ct)
+		ct = cubase_time(split_ticks * split)
+		print(f'ct[0] ct[1] ct[2]')
 
 	print()
 
