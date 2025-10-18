@@ -47,4 +47,4 @@ def run(args):
 		print('need 3 integer args')
 
 if __name__ == '__main__':
-	run (sys.argv)
+	run(sys.argv)
