@@ -2,7 +2,6 @@ import sys
 
 TICKS_16TH_NOTE = 120
 TICKS_4TH_NOTE = 4 * TICKS_16TH_NOTE
-TICKS_BAR = 4 * TICKS_4TH_NOTE
 
 # each split_spec is: [#intervals, #notes, #4thnotes]
 SPLIT_SPECS = ((3, 1, 0), (3, 2, 0), (3, 4, 0),
@@ -22,15 +21,23 @@ def print_split(splits, notes_4th, notes_16th):
 	split_ticks = (notes_4th * TICKS_4TH_NOTE + notes_16th * TICKS_16TH_NOTE) // splits
 	for split in range(1, splits):
 		ct = cubase_time(split_ticks * split)
-		print(f'ct[0] ct[1] ct[2]')
+		print(f'1/4th: {ct[0]}, 1/16th: {ct[1]}, ticks: {ct[2]}')
 
 	print()
 
-def main(args):
+def run(args):
 
 	if len(args) == 1:
 		for spec in SPLIT_SPECS:
 			print_split(spec[0], spec[1], spec[2])
+	elif len(args) == 2 and args[1] == 'jupyter':
+		try:
+			notes_4th =  int(input('enter # of 1/4th notes in interval:  '))
+			notes_16th = int(input('enter # of 1/16th notes in interval: '))
+			splits =     int(input('enter # of subintervals:             '))
+			print_split(splits, notes_4th, notes_16th)
+		except ValueError as e:
+			print(f'{e} is not an integer')
 	elif len(args) == 4:
 		try:
 			print_split(int(args[1]), int(args[2]), int(args[3]))
@@ -40,4 +47,4 @@ def main(args):
 		print('need 3 integer args')
 
 if __name__ == '__main__':
-	main(sys.argv)
+	run (sys.argv)
