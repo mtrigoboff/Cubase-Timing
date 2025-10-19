@@ -35,6 +35,7 @@ def run(args):
 			notes_4th =  int(input('enter # of 1/4th notes in interval:  '))
 			notes_16th = int(input('enter # of 1/16th notes in interval: '))
 			splits =     int(input('enter # of subintervals:             '))
+			print()
 			print_split(splits, notes_4th, notes_16th)
 		except ValueError as e:
 			print(f'{e} is not an integer')
