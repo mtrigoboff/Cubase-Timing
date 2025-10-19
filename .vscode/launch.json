@@ -20,7 +20,7 @@
 			"args": ["jupyter"]
 		},
 		{
-			"name": "spec args",
+			"name": "cmd line args",
 			"type": "debugpy",
 			"request": "launch",
 			"program": "${file}",
